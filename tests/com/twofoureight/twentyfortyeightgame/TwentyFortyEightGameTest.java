@@ -86,7 +86,7 @@ public class TwentyFortyEightGameTest {
 	// test that the basic down command is working
 	@Test
 	public void BasicDownTest() {
-		fail("Not implemented yet");
+
 		clearBoard(game);
 		try {
 			game.set(0, 0, 2);
@@ -97,20 +97,40 @@ public class TwentyFortyEightGameTest {
 			e.printStackTrace();
 			fail("Exception thrown!: " + e.getMessage());
 		}
+		assertTrue(game.getBoard()[0][TwentyFortyEightGame.BOARD_HEIGHT-1].value == 4);
 		
-		assertTrue(game.getBoard()[0][TwentyFortyEightGame.BOARD_HEIGHT].value == 4);
 	}
 	
 	// test that the basic left command is working
 	@Test
-	public void BasicLeftTest() {
-		fail("Not implemented yet");
+	public void BasicLeftTest() {	
+		clearBoard(game);
+		try {
+			game.set(0, 0, 2);
+			game.set(1, 0, 2);
+			
+			game.moveLeft();
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("Exception thrown!: " + e.getMessage());
+		}
+		assertTrue(game.getBoard()[0][0].value == 4);
 	}
 	
-	// test that the basic left command is working
+	// test that the basic right command is working
 	@Test
 	public void BasicRightTest() {
-		fail("Not implemented yet");
+		clearBoard(game);
+		try {
+			game.set(0, 0, 2);
+			game.set(1, 0, 2);
+			
+			game.moveRight();
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("Exception thrown!: " + e.getMessage());
+		}
+		assertTrue(game.getBoard()[TwentyFortyEightGame.BOARD_WIDTH-1][0].value == 4);
 	}
 
 }

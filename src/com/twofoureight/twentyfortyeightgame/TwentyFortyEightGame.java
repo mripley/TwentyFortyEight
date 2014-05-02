@@ -129,7 +129,7 @@ public class TwentyFortyEightGame {
 	public void moveDown() throws Exception {
 		// loop from the bottom up and combine elements as we go
 		for (int x = 0; x < BOARD_WIDTH; x++) {
-			for (int y = BOARD_HEIGHT; y >= 0; y--) {
+			for (int y = BOARD_HEIGHT-1; y >= 0; y--) {
 				combine(x, y, MoveDirection.DOWN);
 			}
 		}
@@ -153,22 +153,40 @@ public class TwentyFortyEightGame {
 	
 	public void moveRight() throws Exception {
 		for (int y = 0; y < BOARD_HEIGHT; y++) {
-			for (int x = BOARD_WIDTH; x >= 0 ; x--) {
+			for (int x = BOARD_WIDTH-1; x >= 0 ; x--) {
 				combine(x, y, MoveDirection.RIGHT);
 			}
 		}
 	}
 	
 	private void combine(int x, int y, MoveDirection dir) throws Exception {
+		checkBounds(x, y);
 		Location neighbor = null;
 		Location thisLoc = board[x][y];
 
 		neighbor = getNeighbor(x, y, dir);
 
+		if (neighbor == null || thisLoc.value == 0 && neighbor.value == 0) {
+			return;
+		}
+		
 		// we can only combine if the values are equal
 		if (neighbor != null && (neighbor.value == thisLoc.value || neighbor.value == 0)) {
 			set(neighbor.x, neighbor.y, neighbor.value + thisLoc.value);
-			set(thisLoc.x, thisLoc.y, 0);	
+			set(thisLoc.x, thisLoc.y, 0);
+			combine(neighbor.x, neighbor.y, dir);
 		}
+	}
+	
+	
+	public String printBoard() {
+		String retval = "";
+		for (int y=0; y < BOARD_HEIGHT; y++) {
+			for (int x = 0; x < BOARD_WIDTH; x++) {
+				retval += board[x][y].value;
+			}
+			retval += "\n";
+		}
+		return retval;
 	}
 }
