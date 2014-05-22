@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -57,6 +58,13 @@ public class TwentyFourtyEight extends Activity {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(
 					R.layout.fragment_twenty_fourty_eight, container, false);
+			
+			View twentyFortyEightView = rootView.findViewById(R.id.twnetyfortyeightview);
+			twentyFortyEightView.setClickable(true);
+			twentyFortyEightView.setFocusable(true);
+			
+			GestureDetector detector = new GestureDetector(twentyFortyEightView.getContext(), new GameGestureDetector(null));
+			
 			return rootView;
 		}
 	}

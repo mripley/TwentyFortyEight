@@ -76,7 +76,7 @@ public class TwentyFortyEightView extends View {
 		   textPaint.setColor(Color.WHITE);
 		   textPaint.setStyle(Paint.Style.FILL);
 		   textPaint.setTextSize(45);
-		   textPaint.setTextAlign(Paint.Align.CENTER);
+		   textPaint.setTextAlign(Paint.Align.CENTER);  
 	}
 	
 	@Override
