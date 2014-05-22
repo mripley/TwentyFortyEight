@@ -10,4 +10,5 @@ public class Location {
 		this.y = y;
 		value = 0;
 	}
+
 }
