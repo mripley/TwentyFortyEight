@@ -1,5 +1,7 @@
 package com.twofoureight.twentyfortyeight;
 
+import com.twofoureight.twentyfortyeightgame.TwentyFortyEightGame;
+
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -8,12 +10,13 @@ import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 
 public class TwentyFourtyEight extends Activity {
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,12 +62,19 @@ public class TwentyFourtyEight extends Activity {
 			View rootView = inflater.inflate(
 					R.layout.fragment_twenty_fourty_eight, container, false);
 			
-			View twentyFortyEightView = rootView.findViewById(R.id.twnetyfortyeightview);
+			TwentyFortyEightView twentyFortyEightView = (TwentyFortyEightView)rootView.findViewById(R.id.twnetyfortyeightview);
 			twentyFortyEightView.setClickable(true);
 			twentyFortyEightView.setFocusable(true);
 			
-			GestureDetector detector = new GestureDetector(twentyFortyEightView.getContext(), new GameGestureDetector(null));
-			
+			final GestureDetector detector = new GestureDetector(twentyFortyEightView.getContext(),
+					                                             new GameGestureDetector(twentyFortyEightView));
+			twentyFortyEightView.setOnTouchListener(new View.OnTouchListener() {
+	            @Override
+	            public boolean onTouch(View view, MotionEvent motionEvent) {
+	            	detector.onTouchEvent(motionEvent);
+	                return false;
+	            }
+	        });
 			return rootView;
 		}
 	}

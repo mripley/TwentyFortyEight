@@ -115,13 +115,36 @@ public class TwentyFortyEightView extends View {
 
 		for (int x = startX; x < minDim; x += minDim/4) {
 			for (int y = startY; y < minDim; y += minDim/4) {
-				canvas.drawRect(new RectF(x, y, x+cellWidth, y+cellWidth), cellPaint);
-				canvas.drawText(Integer.toString(game.getBoard()[cellX][cellY].value), x + textOffsetX, y + textOffsetY, textPaint);
+				int cellValue = game.getBoard()[cellX][cellY].value;
 				
+				if (cellValue > 0) {
+					int color = (70 + (cellValue * 2)) > 240 ? 240 : (70 + (cellValue * 2));
+					int color2 = color - 30 < 0 ? color : color - 10;
+					Log.i("COLOR", Integer.toString(color));
+					cellPaint.setColor(Color.rgb(color2, color, 0));
+				}
+				else {
+					cellPaint.setColor(Color.rgb(136, 136, 136));
+				}
+				
+				canvas.drawRect(new RectF(x, y, x+cellWidth, y+cellWidth), cellPaint);
+				
+				if (cellValue > 0) {
+					canvas.drawText(Integer.toString(game.getBoard()[cellX][cellY].value), x + textOffsetX, y + textOffsetY, textPaint);
+				}
+
 				// wrap around so we stay within out array bounds
 				cellY = (cellY+1) % boardHeight;
 			}
 			cellX++;
 		}
+	}
+	
+	public TwentyFortyEightGame getGame() {
+		return this.game;
+	}
+	
+	public void reDraw() {
+		this.invalidate();
 	}
 }

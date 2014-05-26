@@ -121,9 +121,25 @@ public class TwentyFortyEightGame {
 			freeList.remove(l);
 		}
 	}
-	
+
 	public boolean isGameOver() {
 		return false;
+	}
+	
+	private void addNewItem() {
+		int index = rand.nextInt(freeList.size());
+		Location l = freeList.get(index);
+		try {
+			int dec = rand.nextInt(10);
+			int value = 2;
+			if (dec > 7) {
+				value = 4;
+			}
+			this.set(l.x, l.y, value);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void moveDown() throws Exception {
@@ -133,6 +149,7 @@ public class TwentyFortyEightGame {
 				combine(x, y, MoveDirection.DOWN);
 			}
 		}
+		addNewItem();
 	}
 	
 	public void moveUp() throws Exception {
@@ -141,6 +158,7 @@ public class TwentyFortyEightGame {
 				combine(x, y, MoveDirection.UP);
 			}
 		}
+		addNewItem();
 	}
 	
 	public void moveLeft() throws Exception {
@@ -149,6 +167,7 @@ public class TwentyFortyEightGame {
 				combine(x, y, MoveDirection.LEFT);
 			}
 		}
+		addNewItem();
 	}
 	
 	public void moveRight() throws Exception {
@@ -157,6 +176,7 @@ public class TwentyFortyEightGame {
 				combine(x, y, MoveDirection.RIGHT);
 			}
 		}
+		addNewItem();
 	}
 	
 	private void combine(int x, int y, MoveDirection dir) throws Exception {
